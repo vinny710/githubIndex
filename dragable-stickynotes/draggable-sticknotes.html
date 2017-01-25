@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Draggable - Default functionality</title>
+  <link rel="stylesheet" href="css/jquery-ui.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+  </style>
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/jquery-ui.min.js"></script>
+  <script>
+
+  $(function() {
+    
+    $( ".draggable" ).draggable();
+    $( ".draggable" ).on( "dragstop", function( event, ui ) {$(this).data('postion',ui.position);} );
+    $("#btnAdd").on('click', function(){
+      var div = $('<div class="draggable" class="ui-widget-content"></div');
+      div.html('<div class="card"><div editable="true" class="front"></div><div class="back"><a class="close">X</a></div></div>').draggable();
+      $('#wrapper').append(div);
+    });
+    $("#wrapper").on('click', '.draggable > div',  function(e) {
+         e.preventDefault();
+        $(this).toggleClass('flipped').parent().toggleClass('center');
+        e.stopPropagation();
+    });
+  });
+  </script>
+
+</head>
+<body>
+  <div id="wrapper">
+    <button id="btnAdd">+</button>
+    <div class="draggable" class="ui-widget-content">
+      <div class="card">
+        <div editable="true" class="front">
+        </div>
+        <div class="back"><a class="close">X</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
